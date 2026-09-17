@@ -1,0 +1,145 @@
+[Licensing::Module] Trying to connect to existing licensing client channel...
+[Licensing::IpcConnector] Channel LicenseClient-ADMIN doesn't exist
+[Licensing::Module] Successfully launched the LicensingClient (PId: 21044)
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-ADMIN" at "2026-09-12T08:14:27.2140949Z"
+[Licensing::Client] Code 10 while verifying Licensing Client signature (process Id: 21044, path: "E:/2022.3.62f3c1/Editor/Data/Resources/Licensing/Client/Unity.Licensing.Client.exe")
+[Licensing::Module] LicensingClient has failed validation; ignoring
+[Licensing::Client] Handshaking with LicensingClient:
+  Version:                 1.16.2+bdef8f5
+  Session Id:              47fc9d82088647de911f31050f625847
+  Correlation Id:          307bb669393e0b461a421bf135aa8197
+  External correlation Id: 3179063147465088453
+  Machine Id:              SiTi8bLbZ5xA4ONWFXeUck2NmYY=
+[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-ADMIN" (connect: 9.85s, validation: 0.42s, handshake: 0.22s)
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-ADMIN-notifications" at "2026-09-12T08:14:27.8473643Z"
+[Licensing::Module] Connected to LicensingClient (PId: 21044, launch time: 0.06, total connection time: 10.48s)
+[Licensing::Module] Error: Access token is unavailable; failed to update
+[Licensing::Client] Successfully updated license
+Built from '2022.3/china_unity/release' branch; Version is '2022.3.62f3c1 (1623fc0bbb97) revision 1451004'; Using compiler version '192829333'; Build Type 'Release'
+OS: 'Windows 11  (10.0.26200) 64bit Professional' Language: 'zh' Physical Memory: 32252 MB
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] Serial number assigned to: "F4-PCNP-TMH3-RC2K-MGFX-XXXX"
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+[Licensing::Client] Successfully resolved entitlement details
+
+COMMAND LINE ARGUMENTS:
+E:\2022.3.62f3c1\Editor\Unity.exe
+-batchmode
+-nographics
+-quit
+-projectPath
+D:\ADMIN\Desktop\茹\mvp
+-executeMethod
+VerifyMvp.VerifyAndBuild
+-logFile
+D:\ADMIN\Desktop\茹\validation\rpe-unity-restored.log
+Successfully changed project path to: D:\ADMIN\Desktop\茹\mvp
+D:/ADMIN/Desktop/茹/mvp
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-allocator-temp-initial-block-size-main=262144"
+    "memorysetup-allocator-temp-initial-block-size-worker=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Player connection [23000]  Target information:
+
+Player connection [23000]  * "[IP] 10.22.49.42 [Port] 55504 [Flags] 2 [Guid] 1192829005 [EditorId] 1192829005 [Version] 1048832 [Id] WindowsEditor(7,�Գ��f�ȵĵ���) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Player connection [23000] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [23000] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Input System module state changed to: Initialized.
+[PhysX] Initialized MultithreadedTaskDispatcher with 22 workers.
+[Package Manager] UpmClient::Connect -- Connected to IPC stream "Upm-37660" after 1.2 seconds.
+[Package Manager] Restoring resolved packages state from cache
+[Licensing::Client] Successfully resolved entitlement details
+[Package Manager] Registered 56 packages:
+  Packages from [https://packages.unity.cn]:
+    com.unity.collab-proxy@2.12.4 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.collab-proxy@2.12.4)
+    com.unity.ide.rider@3.0.36 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.ide.rider@3.0.36)
+    com.unity.ide.visualstudio@2.0.22 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.ide.visualstudio@2.0.22)
+    com.unity.test-framework@1.1.33 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.test-framework@1.1.33)
+    com.unity.textmeshpro@3.0.7 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.textmeshpro@3.0.7)
+    com.unity.timeline@1.7.7 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.timeline@1.7.7)
+    com.unity.visualscripting@1.9.4 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.visualscripting@1.9.4)
+    com.unity.ext.nunit@1.0.6 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.ext.nunit@1.0.6)
+    com.unity.2d.animation@9.2.0 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.2d.animation@9.2.0)
+    com.unity.2d.pixel-perfect@5.1.0 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.2d.pixel-perfect@5.1.0)
+    com.unity.2d.psdimporter@8.1.0 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.2d.psdimporter@8.1.0)
+    com.unity.2d.spriteshape@9.1.0 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.2d.spriteshape@9.1.0)
+    com.unity.2d.tilemap.extras@3.1.3 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.2d.tilemap.extras@3.1.3)
+    com.unity.2d.aseprite@1.1.9 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.2d.aseprite@1.1.9)
+    com.unity.nuget.newtonsoft-json@3.2.1 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.nuget.newtonsoft-json@3.2.1)
+    com.unity.2d.common@8.1.0 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.2d.common@8.1.0)
+    com.unity.mathematics@1.2.6 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.mathematics@1.2.6)
+    com.unity.collections@1.2.4 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.collections@1.2.4)
+    com.unity.burst@1.8.21 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.burst@1.8.21)
+  Built-in packages:
+    com.unity.feature.2d@2.0.1 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.feature.2d@2.0.1)
+    com.unity.ugui@1.0.0 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.ugui@1.0.0)
+    com.unity.modules.ai@1.0.0 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.modules.ai@1.0.0)
+    com.unity.modules.androidjni@1.0.0 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.modules.androidjni@1.0.0)
+    com.unity.modules.animation@1.0.0 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.modules.animation@1.0.0)
+    com.unity.modules.assetbundle@1.0.0 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.modules.assetbundle@1.0.0)
+    com.unity.modules.audio@1.0.0 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.modules.audio@1.0.0)
+    com.unity.modules.cloth@1.0.0 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.modules.cloth@1.0.0)
+    com.unity.modules.director@1.0.0 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.modules.director@1.0.0)
+    com.unity.modules.imageconversion@1.0.0 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.modules.imageconversion@1.0.0)
+    com.unity.modules.imgui@1.0.0 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.modules.imgui@1.0.0)
+    com.unity.modules.jsonserialize@1.0.0 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.modules.jsonserialize@1.0.0)
+    com.unity.modules.particlesystem@1.0.0 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.modules.particlesystem@1.0.0)
+    com.unity.modules.physics@1.0.0 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.modules.physics@1.0.0)
+    com.unity.modules.physics2d@1.0.0 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.modules.physics2d@1.0.0)
+    com.unity.modules.screencapture@1.0.0 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.modules.screencapture@1.0.0)
+    com.unity.modules.terrain@1.0.0 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.modules.terrain@1.0.0)
+    com.unity.modules.terrainphysics@1.0.0 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.modules.terrainphysics@1.0.0)
+    com.unity.modules.tilemap@1.0.0 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.modules.tilemap@1.0.0)
+    com.unity.modules.ui@1.0.0 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.modules.ui@1.0.0)
+    com.unity.modules.uielements@1.0.0 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.modules.uielements@1.0.0)
+    com.unity.modules.umbra@1.0.0 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.modules.umbra@1.0.0)
+    com.unity.modules.unityanalytics@1.0.0 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.modules.unityanalytics@1.0.0)
+    com.unity.modules.unitywebrequest@1.0.0 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.modules.unitywebrequest@1.0.0)
+    com.unity.modules.unitywebrequestassetbundle@1.0.0 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.modules.unitywebrequestassetbundle@1.0.0)
+    com.unity.modules.unitywebrequestaudio@1.0.0 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.modules.unitywebrequestaudio@1.0.0)
+    com.unity.modules.unitywebrequesttexture@1.0.0 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.modules.unitywebrequesttexture@1.0.0)
+    com.unity.modules.unitywebrequestwww@1.0.0 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.modules.unitywebrequestwww@1.0.0)
+    com.unity.modules.vehicles@1.0.0 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.modules.vehicles@1.0.0)
+    com.unity.modules.video@1.0.0 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.modules.video@1.0.0)
+    com.unity.modules.vr@1.0.0 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.modules.vr@1.0.0)
+    com.unity.modules.wind@1.0.0 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.modules.wind@1.0.0)
+    com.unity.modules.xr@1.0.0 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.modules.xr@1.0.0)
+    com.unity.modules.subsystems@1.0.0 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.modules.subsystems@1.0.0)
+    com.unity.2d.sprite@1.0.0 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.2d.sprite@1.0.0)
+    com.unity.2d.tilemap@1.0.0 (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\com.unity.2d.tilemap@1.0.0)
+  Git packages:
+    cn.unity.uos.launcher@https://cnb.cool/unity/uos/UOSLauncher.git (location: D:\ADMIN\Desktop\茹\mvp\Library\PackageCache\cn.unity.uos.launcher@76a5a7e54c)
+[Subsystems] No new subsystems found in resolved package list.
+Package Manager log level set to [2]
+[Package Manager] Done registering packages in 0.85 seconds
+[Package Manager] Done resolving packages with errors in 0.05 seconds
+Failed to resolve packages: The "path" argument must be of type string. Received undefined. No packages loaded.
+Exiting without the bug reporter. Application will terminate with return code 1

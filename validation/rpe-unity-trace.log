@@ -1,0 +1,88 @@
+[Licensing::Module] Trying to connect to existing licensing client channel...
+[Licensing::IpcConnector] Channel LicenseClient-ADMIN doesn't exist
+[Licensing::Module] Successfully launched the LicensingClient (PId: 37196)
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-ADMIN" at "2026-09-12T08:12:34.5759759Z"
+[Licensing::Client] Code 10 while verifying Licensing Client signature (process Id: 37196, path: "E:/2022.3.62f3c1/Editor/Data/Resources/Licensing/Client/Unity.Licensing.Client.exe")
+[Licensing::Module] LicensingClient has failed validation; ignoring
+[Licensing::Client] Handshaking with LicensingClient:
+  Version:                 1.16.2+bdef8f5
+  Session Id:              4f3a6c345c7a4754b996a95daa80e368
+  Correlation Id:          afa3b8e6c7df6f56d34621d08cba3773
+  External correlation Id: 3560888716352777722
+  Machine Id:              SiTi8bLbZ5xA4ONWFXeUck2NmYY=
+[Licensing::Module] Successfully connected to LicensingClient on channel: "LicenseClient-ADMIN" (connect: 1.94s, validation: 0.12s, handshake: 0.13s)
+[Licensing::IpcConnector] Successfully connected to: "LicenseClient-ADMIN-notifications" at "2026-09-12T08:12:34.8329076Z"
+[Licensing::Module] Connected to LicensingClient (PId: 37196, launch time: 0.01, total connection time: 2.19s)
+[Licensing::Module] Error: Access token is unavailable; failed to update
+[Licensing::Client] Successfully updated license
+Built from '2022.3/china_unity/release' branch; Version is '2022.3.62f3c1 (1623fc0bbb97) revision 1451004'; Using compiler version '192829333'; Build Type 'Release'
+OS: 'Windows 11  (10.0.26200) 64bit Professional' Language: 'zh' Physical Memory: 32252 MB
+[Licensing::Client] Successfully resolved entitlement details
+[Licensing::Module] Serial number assigned to: "F4-PCNP-TMH3-RC2K-MGFX-XXXX"
+BatchMode: 1, IsHumanControllingUs: 0, StartBugReporterOnCrash: 0, Is64bit: 1, IsPro: 0
+[Licensing::Client] Successfully resolved entitlement details
+[Package Manager] Server::Start --  E:/2022.3.62f3c1/Editor/Data/Resources/PackageManager/Server/UnityPackageManager.exe -s 6680 -ipc -ipc-path Unity-Upm-6680 -l 5
+
+COMMAND LINE ARGUMENTS:
+E:\2022.3.62f3c1\Editor\Unity.exe
+-batchmode
+-nographics
+-quit
+-projectPath
+D:\ADMIN\Desktop\Ëåπ\mvp
+-executeMethod
+VerifyMvp.VerifyAndBuild
+-enablePackageManagerTraces
+-logFile
+D:\ADMIN\Desktop\Ëåπ\validation\rpe-unity-trace.log
+Successfully changed project path to: D:\ADMIN\Desktop\Ëåπ\mvp
+D:/ADMIN/Desktop/Ëåπ/mvp
+[UnityMemory] Configuration Parameters - Can be set up in boot.config
+    "memorysetup-bucket-allocator-granularity=16"
+    "memorysetup-bucket-allocator-bucket-count=8"
+    "memorysetup-bucket-allocator-block-size=33554432"
+    "memorysetup-bucket-allocator-block-count=8"
+    "memorysetup-main-allocator-block-size=16777216"
+    "memorysetup-thread-allocator-block-size=16777216"
+    "memorysetup-gfx-main-allocator-block-size=16777216"
+    "memorysetup-gfx-thread-allocator-block-size=16777216"
+    "memorysetup-cache-allocator-block-size=4194304"
+    "memorysetup-typetree-allocator-block-size=2097152"
+    "memorysetup-profiler-bucket-allocator-granularity=16"
+    "memorysetup-profiler-bucket-allocator-bucket-count=8"
+    "memorysetup-profiler-bucket-allocator-block-size=33554432"
+    "memorysetup-profiler-bucket-allocator-block-count=8"
+    "memorysetup-profiler-allocator-block-size=16777216"
+    "memorysetup-profiler-editor-allocator-block-size=1048576"
+    "memorysetup-temp-allocator-size-main=16777216"
+    "memorysetup-job-temp-allocator-block-size=2097152"
+    "memorysetup-job-temp-allocator-block-size-background=1048576"
+    "memorysetup-job-temp-allocator-reduction-small-platforms=262144"
+    "memorysetup-allocator-temp-initial-block-size-main=262144"
+    "memorysetup-allocator-temp-initial-block-size-worker=262144"
+    "memorysetup-temp-allocator-size-background-worker=32768"
+    "memorysetup-temp-allocator-size-job-worker=262144"
+    "memorysetup-temp-allocator-size-preload-manager=33554432"
+    "memorysetup-temp-allocator-size-nav-mesh-worker=65536"
+    "memorysetup-temp-allocator-size-audio-worker=65536"
+    "memorysetup-temp-allocator-size-cloud-worker=32768"
+    "memorysetup-temp-allocator-size-gi-baking-worker=262144"
+    "memorysetup-temp-allocator-size-gfx=262144"
+Player connection [40800]  Target information:
+
+Player connection [40800]  * "[IP] 10.22.49.42 [Port] 55504 [Flags] 2 [Guid] 3904964880 [EditorId] 3904964880 [Version] 1048832 [Id] WindowsEditor(7,“‘≥ÀÌfœ»µƒµÁƒ‘) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" 
+
+Player connection [40800] Host joined multi-casting on [225.0.0.222:54997]...
+Player connection [40800] Host joined alternative multi-casting on [225.0.0.222:34997]...
+Input System module state changed to: Initialized.
+[PhysX] Initialized MultithreadedTaskDispatcher with 22 workers.
+[Package Manager] UpmClient::Connect -- Connected to IPC stream "Upm-6680" after 0.8 seconds.
+[Package Manager] Request::StartRequest -- [project:resolve-packages] (Id: 8b864025809f0b54fb3d820e79e77887)
+  Request: {"type":"project:resolve-packages","data":{"requestId":"8b864025809f0b54fb3d820e79e77887","headers":{"x-log-level-override":"5","x-editor-path":"E:/2022.3.62f3c1/Editor/Data/Resources/PackageManager/Editor","x-unity-version":"2022.3.62f3c1","x-builtin-packages-path":"E:/2022.3.62f3c1/Editor/Data/Resources/PackageManager/BuiltInPackages","x-project-path":"D:/ADMIN/Desktop/Ëåπ/mvp/Packages","x-genesis-user-token":"","x-genesis-environment":"production","x-dotnet-runtime-path":"E:/2022.3.62f3c1/Editor/Data/NetCoreRuntime/dotnet"},"payload":{},"params":{},"query":{}}}
+
+[Package Manager] Request::Done [500] in 0.021 seconds -- [project:resolve-packages] (Id: 8b864025809f0b54fb3d820e79e77887)
+  Response: {"message":"The \"path\" argument must be of type string. Received undefined"}
+
+[Package Manager] Done resolving packages with errors in 0.03 seconds
+Failed to resolve packages: The "path" argument must be of type string. Received undefined. No packages loaded.
+Exiting without the bug reporter. Application will terminate with return code 1

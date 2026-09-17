@@ -1,0 +1,9 @@
+#
+Name: Astaroth
+Path: 16266666
+Song: 16266666.mp3
+Picture: 16266666.png
+Chart: 16266666.json
+Level: VeryHard - Lv.31
+Composer: Team Grimoire
+Charter: 紫叶

@@ -1,0 +1,130 @@
+{
+  "frames": {
+    "frame10": {
+      "filename": "frame 0",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 16,
+        "h": 16
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 16,
+        "h": 16
+      },
+      "sourceSize": {
+        "w": 16,
+        "h": 16
+      },
+      "duration": 1000
+    },
+    "frame2": {
+      "filename": "frame 1",
+      "frame": {
+        "x": 16,
+        "y": 0,
+        "w": 16,
+        "h": 16
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 16,
+        "h": 16
+      },
+      "sourceSize": {
+        "w": 16,
+        "h": 16
+      },
+      "duration": 50
+    },
+    "frame9": {
+      "filename": "frame 2",
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 16,
+        "h": 16
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 16,
+        "h": 16
+      },
+      "sourceSize": {
+        "w": 16,
+        "h": 16
+      },
+      "duration": 50
+    },
+    "frame1": {
+      "filename": "frame 3",
+      "frame": {
+        "x": 16,
+        "y": 0,
+        "w": 16,
+        "h": 16
+      },
+      "rotated": false,
+      "trimmed": false,
+      "spriteSourceSize": {
+        "x": 0,
+        "y": 0,
+        "w": 16,
+        "h": 16
+      },
+      "sourceSize": {
+        "w": 16,
+        "h": 16
+      },
+      "duration": 50
+    }
+  },
+  "meta": {
+    "size": {
+      "w": 32,
+      "h": 16
+    },
+    "frameTags": [
+      {
+        "name": "摆动",
+        "from": 0,
+        "to": 3,
+        "direction": "forward"
+      },
+      {
+        "name": "倒序",
+        "from": 0,
+        "to": 3,
+        "direction": "reverse"
+      },
+      {
+        "name": "往返",
+        "from": 0,
+        "to": 3,
+        "direction": "pingpong"
+      },
+      {
+        "name": "倒序往返",
+        "from": 0,
+        "to": 3,
+        "direction": "pingpong_reverse"
+      },
+      {
+        "name": "单帧",
+        "from": 2,
+        "to": 2,
+        "direction": "pingpong"
+      }
+    ]
+  }
+}

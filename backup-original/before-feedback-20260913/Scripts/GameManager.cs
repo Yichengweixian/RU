@@ -1,0 +1,367 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using UnityEngine;
+using UnityEngine.Networking;
+
+public sealed class GameManager : MonoBehaviour {
+    enum ScreenState { Menu, Loading, Playing, Paused, Result }
+    ScreenState screen = ScreenState.Menu;
+    readonly KeyCode[] keys = { KeyCode.A, KeyCode.S, KeyCode.D, KeyCode.F };
+    readonly List<ChartData> charts = new List<ChartData>();
+    AudioSource audioSource;
+    AudioClip loadedClip;
+    ChartData chart;
+    RhythmSession session;
+    int selected, offsetMs;
+    float speed = 330;
+    double originDsp, pausedTime;
+    string error = "", judge = "";
+    float judgeUntil;
+    Vector2 scroll;
+    GUIStyle normal, small, title, centered, button, big;
+    Font font;
+    bool[] held = new bool[4];
+    bool stylesReady;
+    const float LaneLeft = 424, LaneWidth = 108, JudgeY = 532;
+    string qaMode, qaDir, qaChart;
+    bool qaMenu, qaPlay, qaPause, qaResult;
+    double qaPauseRealtime;
+    int qaNext;
+    public double SongTime { get { return screen == ScreenState.Paused ? pausedTime : AudioSettings.dspTime - originDsp; } }
+    double JudgeTime { get { return SongTime - offsetMs / 1000.0; } }
+    string SongsFolder { get { return Path.Combine(Application.streamingAssetsPath, "Songs"); } }
+
+    void Start() {
+        audioSource = GetComponent<AudioSource>();
+        audioSource.volume = 0.65f;
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 120;
+        Application.runInBackground = true;
+        offsetMs = PlayerPrefs.GetInt("RhythmOffsetMs", 0);
+        speed = PlayerPrefs.GetFloat("RhythmSpeed", 330);
+#if UNITY_EDITOR || DEVELOPMENT_BUILD
+        foreach (string arg in Environment.GetCommandLineArgs()) {
+            if (arg.StartsWith("--verify-run=")) qaMode = arg.Substring(13);
+            if (arg.StartsWith("--verify-output=")) qaDir = arg.Substring(16);
+            if (arg.StartsWith("--verify-chart=")) qaChart = arg.Substring(15);
+        }
+#endif
+        RefreshCharts();
+#if UNITY_EDITOR
+        string startChart = UnityEditor.SessionState.GetString("RhythmMVP.StartChart", "");
+        UnityEditor.SessionState.EraseString("RhythmMVP.StartChart");
+        if (!String.IsNullOrEmpty(startChart)) {
+            int startIndex = charts.FindIndex(c => c.sourcePath == startChart);
+            if (startIndex >= 0) { selected = startIndex; Begin(); }
+        }
+#endif
+        if (!String.IsNullOrEmpty(qaMode) && !String.IsNullOrEmpty(qaChart)) {
+            charts.Clear();
+            charts.Add(ChartLoader.LoadFile(qaChart));
+            selected = 0;
+            error = "";
+        }
+        if (!String.IsNullOrEmpty(qaMode)) {
+            offsetMs = 0;
+            speed = 330;
+            if (!String.IsNullOrEmpty(qaDir)) Directory.CreateDirectory(qaDir);
+            StartCoroutine(QaStart());
+        }
+    }
+
+    void RefreshCharts() {
+        string previous = charts.Count > 0 ? charts[Mathf.Clamp(selected, 0, charts.Count - 1)].sourcePath : PlayerPrefs.GetString("RhythmMVP.SelectedChart", "");
+        charts.Clear();
+        error = "";
+        if (!Directory.Exists(SongsFolder)) Directory.CreateDirectory(SongsFolder);
+        string[] paths = Directory.GetFiles(SongsFolder, "*.json", SearchOption.AllDirectories);
+        Array.Sort(paths, StringComparer.OrdinalIgnoreCase);
+        foreach (string path in paths) {
+            try { charts.Add(ChartLoader.LoadFile(path)); }
+            catch (Exception e) { error += Path.GetFileName(path) + "：" + e.Message + "\n"; }
+        }
+        selected = Math.Max(0, charts.FindIndex(c => c.sourcePath == previous));
+        if (charts.Count == 0 && error.Length == 0) error = "还没有谱面。在 Unity 顶部“音游”菜单导入，或点击这里的“导入谱面”。";
+    }
+
+    void OpenChart() {
+        try {
+            string path = NativeChartPicker.Open(SongsFolder);
+            if (String.IsNullOrEmpty(path)) return;
+            RpeChartLoader.Parse(File.ReadAllText(path));
+            string audio = ChartImportService.FindAudio(path);
+            if (audio == null) audio = NativeChartPicker.OpenAudio(Path.GetDirectoryName(path));
+            if (String.IsNullOrEmpty(audio)) return;
+            string imported = ChartImportService.Import(path, audio, SongsFolder);
+            ChartData opened = ChartLoader.LoadFile(imported);
+            int found = charts.FindIndex(c => c.sourcePath == opened.sourcePath);
+            if (found >= 0) { charts[found] = opened; selected = found; }
+            else { charts.Add(opened); selected = charts.Count - 1; }
+            error = "";
+        } catch (Exception e) { error = e.Message; }
+    }
+
+    void Begin() {
+        if (charts.Count == 0 || screen == ScreenState.Loading) return;
+        if (charts[selected].notes.Length == 0) { error = "这是空谱面，请先放置音符并重新导入。"; return; }
+        StartCoroutine(LoadAndPlay(charts[selected].sourcePath));
+    }
+    IEnumerator LoadAndPlay(string path) {
+        screen = ScreenState.Loading;
+        error = "";
+        audioSource.Stop();
+        chart = null;
+        string audioPath = "";
+        try {
+            chart = ChartLoader.LoadFile(path);
+            if (chart.notes.Length == 0) throw new FormatException("这是空谱面，请先放置音符并重新导入。");
+            audioPath = ChartLoader.AudioPath(chart);
+            if (!File.Exists(audioPath)) throw new FileNotFoundException("找不到音频：" + chart.audioName + "。请把音频与谱面放在一起。");
+        } catch (Exception e) { error = e.Message; }
+        if (error.Length > 0) { screen = ScreenState.Menu; yield break; }
+        AudioType type;
+        switch (Path.GetExtension(audioPath).ToLowerInvariant()) {
+            case ".wav": type = AudioType.WAV; break;
+            case ".ogg": type = AudioType.OGGVORBIS; break;
+            case ".mp3": type = AudioType.MPEG; break;
+            default: error = "支持 WAV、OGG、MP3 音频。"; screen = ScreenState.Menu; yield break;
+        }
+        using (UnityWebRequest request = UnityWebRequestMultimedia.GetAudioClip(new Uri(audioPath).AbsoluteUri, type)) {
+            yield return request.SendWebRequest();
+            if (request.result != UnityWebRequest.Result.Success) {
+                error = "音频加载失败：" + request.error;
+                screen = ScreenState.Menu;
+                yield break;
+            }
+            if (loadedClip != null) Destroy(loadedClip);
+            loadedClip = DownloadHandlerAudioClip.GetContent(request);
+        }
+        if (loadedClip == null || loadedClip.length <= 0) { error = "音频为空或无法解码。"; screen = ScreenState.Menu; yield break; }
+        double lastEnd = 0;
+        foreach (NoteData note in chart.notes) lastEnd = Math.Max(lastEnd, note.endTime);
+        if (lastEnd > loadedClip.length + 0.15) {
+            error = "谱面最后音符超出音频长度，请检查配套音频。";
+            screen = ScreenState.Menu;
+            yield break;
+        }
+        charts[selected] = chart;
+        session = new RhythmSession(chart.notes);
+        session.Judged += OnJudged;
+        judge = "";
+        Array.Clear(held, 0, held.Length);
+        qaNext = 0;
+        audioSource.clip = loadedClip;
+        originDsp = AudioSettings.dspTime + Math.Max(2.0, 1.5 - chart.notes[0].time);
+        audioSource.PlayScheduled(originDsp);
+        screen = ScreenState.Playing;
+        Debug.Log("RHYTHM_START " + Path.GetFileName(path) + " notes=" + chart.notes.Length + " audio=" + loadedClip.length);
+    }
+
+    void Update() {
+        if (screen == ScreenState.Menu && Input.GetKeyDown(KeyCode.Return)) Begin();
+        if (screen == ScreenState.Result && Input.GetKeyDown(KeyCode.R)) Begin();
+        if (screen == ScreenState.Paused) {
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Escape)) Resume();
+            if (qaPause && !String.IsNullOrEmpty(qaMode) && Time.realtimeSinceStartupAsDouble - qaPauseRealtime > 0.5) Resume();
+            return;
+        }
+        if (screen != ScreenState.Playing) return;
+        if (Input.GetKeyDown(KeyCode.Escape)) { Pause(); return; }
+        double time = JudgeTime;
+        if (String.IsNullOrEmpty(qaMode)) {
+            for (int lane = 0; lane < 4; lane++) {
+                held[lane] = Input.GetKey(keys[lane]);
+                if (Input.GetKeyDown(keys[lane])) session.Press(lane, time);
+                if (!held[lane]) session.Release(lane, time);
+            }
+        } else {
+            if (qaMode == "perfect") {
+                while (qaNext < chart.notes.Length && chart.notes[qaNext].time <= time) {
+                    session.Press(chart.notes[qaNext].lane, time);
+                    qaNext++;
+                }
+                for (int lane = 0; lane < 4; lane++) held[lane] = false;
+                for (int i = 0; i < chart.notes.Length; i++)
+                    if (session.States[i] == NoteState.Holding) held[chart.notes[i].lane] = true;
+            }
+            if (!qaPlay && time > 4) { qaPlay = true; StartCoroutine(Capture("playing")); }
+            if (!qaPause && time > 7) {
+                qaPause = true;
+                Pause();
+                qaPauseRealtime = Time.realtimeSinceStartupAsDouble;
+                StartCoroutine(Capture("paused"));
+                return;
+            }
+        }
+        session.Advance(time);
+        if (SongTime >= loadedClip.length + 0.4 + Math.Max(0, offsetMs / 1000.0)) EndSong();
+    }
+
+    void OnJudged(int note, Judgement value) {
+        judge = value.ToString();
+        judgeUntil = Time.unscaledTime + 0.4f;
+    }
+    void Pause() {
+        if (screen != ScreenState.Playing) return;
+        pausedTime = SongTime;
+        audioSource.Pause();
+        screen = ScreenState.Paused;
+    }
+    void Resume() {
+        if (screen != ScreenState.Paused) return;
+        originDsp = AudioSettings.dspTime - pausedTime;
+        if (pausedTime < 0) { audioSource.Stop(); audioSource.PlayScheduled(originDsp); }
+        else audioSource.UnPause();
+        screen = ScreenState.Playing;
+    }
+    void OnApplicationFocus(bool focus) {
+        if (!focus && String.IsNullOrEmpty(qaMode)) Pause();
+    }
+    void EndSong() {
+        session.FinishAll();
+        audioSource.Stop();
+        screen = ScreenState.Result;
+        Debug.Log("RHYTHM_RESULT perfect=" + session.Perfect + " good=" + session.Good + " miss=" + session.Miss + " maxCombo=" + session.MaxCombo);
+        if (!String.IsNullOrEmpty(qaMode) && !qaResult) { qaResult = true; StartCoroutine(QaFinish()); }
+    }
+    void Menu() {
+        audioSource.Stop();
+        screen = ScreenState.Menu;
+        Array.Clear(held, 0, held.Length);
+        judge = "";
+    }
+
+    void SetupStyles() {
+        if (stylesReady) return;
+        font = Font.CreateDynamicFontFromOSFont(new[] { "Microsoft YaHei", "SimHei", "Arial" }, 24);
+        normal = new GUIStyle(GUI.skin.label) { font = font, fontSize = 24, wordWrap = true };
+        normal.normal.textColor = Color.white;
+        small = new GUIStyle(normal) { fontSize = 18 };
+        title = new GUIStyle(normal) { fontSize = 38 };
+        centered = new GUIStyle(normal) { alignment = TextAnchor.MiddleCenter };
+        big = new GUIStyle(centered) { fontSize = 46 };
+        button = new GUIStyle(GUI.skin.button) { font = font, fontSize = 22 };
+        stylesReady = true;
+    }
+    void OnGUI() {
+        SetupStyles();
+        float scale = Mathf.Min(Screen.width / 1280f, Screen.height / 720f);
+        GUI.matrix = Matrix4x4.TRS(new Vector3((Screen.width - 1280 * scale) / 2, (Screen.height - 720 * scale) / 2), Quaternion.identity, new Vector3(scale, scale, 1));
+        GUI.color = Color.white;
+        if (screen == ScreenState.Menu) DrawMenu();
+        else if (screen == ScreenState.Loading) GUI.Label(new Rect(300, 300, 680, 80), "正在加载音频…", big);
+        else if (screen == ScreenState.Result) DrawResult();
+        else {
+            DrawPlayfield();
+            if (screen == ScreenState.Paused) DrawPause();
+        }
+    }
+
+    void DrawMenu() {
+        GUI.Label(new Rect(70, 38, 1100, 60), "四轨音游 · 基础模板", title);
+        GUI.Label(new Rect(72, 105, 1120, 38), "A / S / D / F　单键、同时按键、长按　｜　完成度 60% 及格", small);
+        scroll = GUI.BeginScrollView(new Rect(70, 170, 610, 310), scroll, new Rect(0, 0, 575, Math.Max(305, charts.Count * 84)));
+        if (charts.Count == 0) {
+            GUI.Label(new Rect(30, 65, 515, 60), "尚未导入谱面", centered);
+            GUI.Label(new Rect(45, 142, 485, 100), "在 PhiEdit 写好谱面并导出 JSON，\n再导入配套音频即可开始。", small);
+        }
+        for (int i = 0; i < charts.Count; i++) {
+            ChartData c = charts[i];
+            if (GUI.Button(new Rect(0, i * 84, 575, 74), (i == selected ? "● " : "") + c.title + "\n" + c.difficulty + "　·　" + c.notes.Length + " 音符", button)) selected = i;
+        }
+        GUI.EndScrollView();
+        GUI.Label(new Rect(735, 173, 470, 45), "游玩设置", normal);
+        GUI.Label(new Rect(735, 231, 460, 35), "下落速度  " + speed.ToString("F0"), small);
+        speed = GUI.HorizontalSlider(new Rect(737, 277, 400, 25), speed, 200, 520);
+        GUI.Label(new Rect(735, 320, 460, 32), "对音偏移  " + offsetMs + " ms", small);
+        if (GUI.Button(new Rect(735, 364, 110, 42), "− 10", button)) offsetMs = Math.Max(-200, offsetMs - 10);
+        if (GUI.Button(new Rect(863, 364, 110, 42), "+ 10", button)) offsetMs = Math.Min(200, offsetMs + 10);
+        if (GUI.Button(new Rect(991, 364, 145, 42), "重置", button)) offsetMs = 0;
+        GUI.Label(new Rect(735, 425, 440, 55), "正值：音符比音乐更晚到达判定线。\n建议先用 0，确认手感后再调整。", small);
+        GUI.enabled = charts.Count > 0 && charts[selected].notes.Length > 0;
+        if (GUI.Button(new Rect(70, 504, 260, 60), "开始演奏  Enter", button)) { SaveSettings(); Begin(); }
+        GUI.enabled = true;
+        if (GUI.Button(new Rect(350, 504, 160, 60), "导入谱面", button)) OpenChart();
+        if (GUI.Button(new Rect(530, 504, 150, 60), "刷新列表", button)) RefreshCharts();
+        if (GUI.Button(new Rect(735, 504, 180, 60), "谱面文件夹", button)) Application.OpenURL(new Uri(SongsFolder).AbsoluteUri);
+        if (GUI.Button(new Rect(935, 504, 200, 60), "退出", button)) { SaveSettings(); Application.Quit(); }
+        string message = error;
+        if (message.Length == 0 && charts.Count > 0 && charts[selected].warnings.Length > 0) message = String.Join("\n", charts[selected].warnings);
+        GUI.Label(new Rect(70, 590, 1135, 92), message.Length > 0 ? message : "PhiEdit 导出 JSON → 导入谱面 → 开始演奏。修改后重新导入同一份文件即可更新。", small);
+    }
+    void SaveSettings() { PlayerPrefs.SetInt("RhythmOffsetMs", offsetMs); PlayerPrefs.SetFloat("RhythmSpeed", speed); PlayerPrefs.Save(); }
+    void DrawPlayfield() {
+        GUI.Label(new Rect(48, 35, 355, 75), chart.title, normal);
+        GUI.Label(new Rect(48, 132, 320, 110), "COMBO\n" + session.Combo, title);
+        GUI.Label(new Rect(48, 284, 335, 80), "完成度  " + session.Completion.ToString("F1") + "%", normal);
+        GUI.Label(new Rect(930, 70, 310, 175), "Perfect  " + session.Perfect + "\nGood     " + session.Good + "\nMiss       " + session.Miss, normal);
+        GUI.Label(new Rect(930, 300, 290, 75), Math.Max(0, SongTime).ToString("F1") + " / " + loadedClip.length.ToString("F1") + " 秒", small);
+        GUI.Label(new Rect(930, 408, 300, 110), "Esc 暂停\n长条：按住直到尾端\n同时到线：一起按下", small);
+        GUI.BeginGroup(new Rect(LaneLeft, 34, LaneWidth * 4, 620));
+        float localJudgeY = JudgeY - 34;
+        for (int i = 0; i < 4; i++) {
+            Fill(new Rect(i * LaneWidth, 0, LaneWidth - 1, 580), held[i] ? 0.22f : 0.065f);
+            Fill(new Rect(i * LaneWidth, 0, 1, 580), 0.33f);
+            GUI.Label(new Rect(i * LaneWidth, 550, LaneWidth, 50), keys[i].ToString(), centered);
+        }
+        Fill(new Rect(0, localJudgeY - 2, LaneWidth * 4, 4), 1);
+        for (int i = 0; i < chart.notes.Length; i++) NoteController.Draw(chart.notes[i], session.States[i], JudgeTime, speed, 0, LaneWidth, localJudgeY);
+        if (Time.unscaledTime < judgeUntil) GUI.Label(new Rect(0, 320, LaneWidth * 4, 60), judge, big);
+        if (SongTime < 0) GUI.Label(new Rect(0, 240, LaneWidth * 4, 65), Math.Ceiling(-SongTime).ToString(), big);
+        GUI.EndGroup();
+        GUI.Label(new Rect(48, 639, 1160, 40), "A / S / D / F　　白色横线为判定线　　Perfect ±60 ms · Good ±140 ms", small);
+    }
+    void Fill(Rect rect, float gray) {
+        GUI.color = new Color(gray, gray, gray, 1);
+        GUI.DrawTexture(rect, Texture2D.whiteTexture);
+        GUI.color = Color.white;
+    }
+    void DrawPause() {
+        GUI.color = new Color(0, 0, 0, 0.92f);
+        GUI.DrawTexture(new Rect(0, 0, 1280, 720), Texture2D.whiteTexture);
+        GUI.color = Color.white;
+        GUI.Label(new Rect(390, 180, 500, 80), "已暂停", big);
+        if (GUI.Button(new Rect(440, 300, 400, 60), "继续  Space", button)) Resume();
+        if (GUI.Button(new Rect(440, 385, 400, 60), "重新开始", button)) Begin();
+        if (GUI.Button(new Rect(440, 470, 400, 60), "返回选歌", button)) Menu();
+    }
+    void DrawResult() {
+        GUI.Label(new Rect(200, 55, 880, 80), session.Passed ? "演奏完成 · 及格" : "演奏完成 · 再试一次", big);
+        GUI.Label(new Rect(200, 151, 880, 65), chart.title, centered);
+        GUI.Label(new Rect(200, 228, 880, 75), "完成度  " + session.Completion.ToString("F1") + "%", big);
+        GUI.Label(new Rect(260, 336, 760, 55), "Perfect  " + session.Perfect + "      Good  " + session.Good + "      Miss  " + session.Miss, centered);
+        GUI.Label(new Rect(260, 405, 760, 50), "最大连击  " + session.MaxCombo + "　｜　音符总数  " + chart.notes.Length, centered);
+        if (GUI.Button(new Rect(320, 521, 300, 65), "重新演奏  R", button)) Begin();
+        if (GUI.Button(new Rect(660, 521, 300, 65), "返回选歌", button)) Menu();
+        GUI.Label(new Rect(260, 625, 760, 40), "完成度 = (Perfect + Good × 0.6) ÷ 音符数；长按按一颗音符计分。", small);
+    }
+
+    IEnumerator QaStart() {
+        yield return new WaitForSecondsRealtime(1);
+        if (!qaMenu) { qaMenu = true; yield return Capture("menu"); }
+        if (qaMode == "empty") {
+            yield return new WaitForSecondsRealtime(1);
+            bool empty = charts.Count == 0;
+            File.WriteAllText(Path.Combine(qaDir, "report.json"), "{\"mode\":\"empty\",\"ok\":" + (empty ? "true" : "false") + "}");
+            Application.Quit(empty ? 0 : 1);
+            yield break;
+        }
+        Begin();
+    }
+    IEnumerator Capture(string name) {
+        if (String.IsNullOrEmpty(qaDir)) yield break;
+        yield return new WaitForEndOfFrame();
+        ScreenCapture.CaptureScreenshot(Path.Combine(qaDir, name + ".png"));
+    }
+    IEnumerator QaFinish() {
+        yield return Capture("result");
+        yield return new WaitForSecondsRealtime(1);
+        bool ok = qaMode == "perfect" ? session.Perfect == chart.notes.Length && session.Miss == 0 : session.Miss == chart.notes.Length;
+        string report = "{\"mode\":\"" + qaMode + "\",\"ok\":" + (ok ? "true" : "false") + ",\"notes\":" + chart.notes.Length + ",\"perfect\":" + session.Perfect + ",\"good\":" + session.Good + ",\"miss\":" + session.Miss + ",\"pauseTest\":" + (qaPause ? "true" : "false") + "}";
+        if (!String.IsNullOrEmpty(qaDir)) File.WriteAllText(Path.Combine(qaDir, "report.json"), report);
+        Debug.Log("RHYTHM_VERIFY " + report);
+        Application.Quit(ok ? 0 : 1);
+    }
+}

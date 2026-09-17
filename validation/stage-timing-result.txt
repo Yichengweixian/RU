@@ -1,0 +1,6 @@
+PASS 122 stage timing checks
+PASS 15 stage editor checks
+PASS 44 sprite sheet checks
+PASS 16 feedback checks
+PASS 35 core checks.
+Succeeded errors=0 warnings=1

@@ -1,0 +1,170 @@
+{
+  "META": {
+    "name": "演出工具示例 2",
+    "song": "tone.wav",
+    "offset": 250,
+    "RPEVersion": 130
+  },
+  "BPMList": [
+    {
+      "startTime": [
+        0,
+        0,
+        1
+      ],
+      "bpm": 160
+    },
+    {
+      "startTime": [
+        8,
+        0,
+        1
+      ],
+      "bpm": 110
+    }
+  ],
+  "judgeLineList": [
+    {
+      "bpmfactor": 1,
+      "father": -1,
+      "eventLayers": [
+        {
+          "rotateEvents": [
+            {
+              "start": 0,
+              "end": 0
+            }
+          ]
+        }
+      ],
+      "notes": [
+        {
+          "type": 1,
+          "positionX": -506.25,
+          "startTime": [
+            2,
+            0,
+            1
+          ],
+          "endTime": [
+            2,
+            0,
+            1
+          ],
+          "above": 1,
+          "isFake": 0,
+          "speed": 1,
+          "alpha": 255
+        },
+        {
+          "type": 1,
+          "positionX": -168.75,
+          "startTime": [
+            4,
+            0,
+            1
+          ],
+          "endTime": [
+            4,
+            0,
+            1
+          ],
+          "above": 1,
+          "isFake": 0,
+          "speed": 1,
+          "alpha": 255
+        },
+        {
+          "type": 1,
+          "positionX": 168.75,
+          "startTime": [
+            4,
+            0,
+            1
+          ],
+          "endTime": [
+            4,
+            0,
+            1
+          ],
+          "above": 1,
+          "isFake": 0,
+          "speed": 1,
+          "alpha": 255
+        },
+        {
+          "type": 2,
+          "positionX": 506.25,
+          "startTime": [
+            6,
+            0,
+            1
+          ],
+          "endTime": [
+            10,
+            0,
+            1
+          ],
+          "above": 1,
+          "isFake": 0,
+          "speed": 1,
+          "alpha": 255
+        },
+        {
+          "type": 1,
+          "positionX": -506.25,
+          "startTime": [
+            12,
+            0,
+            1
+          ],
+          "endTime": [
+            12,
+            0,
+            1
+          ],
+          "above": 1,
+          "isFake": 0,
+          "speed": 1,
+          "alpha": 255
+        },
+        {
+          "type": 2,
+          "positionX": -168.75,
+          "startTime": [
+            16,
+            0,
+            1
+          ],
+          "endTime": [
+            22,
+            0,
+            1
+          ],
+          "above": 1,
+          "isFake": 0,
+          "speed": 1,
+          "alpha": 255
+        },
+        {
+          "type": 1,
+          "positionX": 168.75,
+          "startTime": [
+            24,
+            0,
+            1
+          ],
+          "endTime": [
+            24,
+            0,
+            1
+          ],
+          "above": 1,
+          "isFake": 0,
+          "speed": 1,
+          "alpha": 255
+        }
+      ]
+    }
+  ]
+}

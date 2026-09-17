@@ -1,0 +1,28 @@
+Mono path[0] = 'D:/ADMIN/Desktop/茹/交付/四轨音游/RhythmMVP_Data/Managed'
+Mono config path = 'D:/ADMIN/Desktop/茹/交付/四轨音游/MonoBleedingEdge/etc'
+Found 1 interfaces on host : 0) 10.22.49.42
+Player connection [24312]  Target information:
+
+Player connection [24312]  * "[IP] 10.22.49.42 [Port] 55000 [Flags] 2 [Guid] 176410799 [EditorId] 2883229516 [Version] 1048832 [Id] WindowsPlayer(2,�Գ��f�ȵĵ���) [Debug] 0 [PackageName] WindowsPlayer [ProjectName] Four Key Rhythm" 
+
+Player connection [24312] Started UDP target info broadcast (1) on [225.0.0.222:54997].
+
+Input System module state changed to: Initialized.
+[PhysX] Initialized MultithreadedTaskDispatcher with 22 workers.
+Initialize engine version: 2022.3.62f3c1 (1623fc0bbb97)
+[Subsystems] Discovering subsystems at path D:/ADMIN/Desktop/茹/交付/四轨音游/RhythmMVP_Data/UnitySubsystems
+GfxDevice: creating device client; threaded=1; jobified=0
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.1]
+    Renderer: Intel(R) Arc(TM) Graphics (ID=0x7d55)
+    Vendor:   Intel
+    VRAM:     18384 MB
+    Driver:   32.0.101.6127
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.283 seconds
+- Finished resetting the current domain, in  0.003 seconds
+<RI> Initializing input.
+<RI> Input initialized.
+<RI> Initialized touch support.
+[PhysX] Initialized MultithreadedTaskDispatcher with 22 workers.
+UnloadTime: 1.900800 ms

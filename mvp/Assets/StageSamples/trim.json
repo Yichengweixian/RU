@@ -1,0 +1,23 @@
+{
+  "frames": [
+    {
+      "frame": {
+        "x": 0,
+        "y": 0,
+        "w": 2,
+        "h": 2
+      },
+      "trimmed": true,
+      "spriteSourceSize": {
+        "x": 3,
+        "y": 1,
+        "w": 2,
+        "h": 2
+      },
+      "sourceSize": {
+        "w": 8,
+        "h": 8
+      }
+    }
+  ]
+}

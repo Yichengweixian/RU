@@ -1,0 +1,447 @@
+{
+  "BPMList": [
+    {
+      "bpm": 118.0,
+      "startTime": [
+        0,
+        0,
+        1
+      ]
+    }
+  ],
+  "META": {
+    "RPEVersion": 130,
+    "background": "22262812.png",
+    "charter": "威威",
+    "composer": "111",
+    "id": "22262812",
+    "level": "0",
+    "name": "漂流人间",
+    "offset": 62,
+    "song": "audio.mp3"
+  },
+  "judgeLineGroup": [
+    "Default"
+  ],
+  "judgeLineList": [
+    {
+      "Group": 0,
+      "Name": "Untitled",
+      "Texture": "line.png",
+      "alphaControl": [
+        {
+          "alpha": 1.0,
+          "easing": 1,
+          "x": 0.0
+        },
+        {
+          "alpha": 1.0,
+          "easing": 1,
+          "x": 9999999.0
+        }
+      ],
+      "bpmfactor": 1.0,
+      "eventLayers": [
+        {
+          "alphaEvents": [
+            {
+              "bezier": 0,
+              "bezierPoints": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "easingLeft": 0.0,
+              "easingRight": 1.0,
+              "easingType": 1,
+              "end": 0,
+              "endTime": [
+                1,
+                0,
+                1
+              ],
+              "linkgroup": 0,
+              "start": 0,
+              "startTime": [
+                0,
+                0,
+                1
+              ]
+            }
+          ],
+          "moveXEvents": [
+            {
+              "bezier": 0,
+              "bezierPoints": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "easingLeft": 0.0,
+              "easingRight": 1.0,
+              "easingType": 1,
+              "end": 0.0,
+              "endTime": [
+                1,
+                0,
+                1
+              ],
+              "linkgroup": 0,
+              "start": 0.0,
+              "startTime": [
+                0,
+                0,
+                1
+              ]
+            }
+          ],
+          "moveYEvents": [
+            {
+              "bezier": 0,
+              "bezierPoints": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "easingLeft": 0.0,
+              "easingRight": 1.0,
+              "easingType": 1,
+              "end": 0.0,
+              "endTime": [
+                1,
+                0,
+                1
+              ],
+              "linkgroup": 0,
+              "start": 0.0,
+              "startTime": [
+                0,
+                0,
+                1
+              ]
+            }
+          ],
+          "rotateEvents": [
+            {
+              "bezier": 0,
+              "bezierPoints": [
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "easingLeft": 0.0,
+              "easingRight": 1.0,
+              "easingType": 1,
+              "end": 0.0,
+              "endTime": [
+                1,
+                0,
+                1
+              ],
+              "linkgroup": 0,
+              "start": 0.0,
+              "startTime": [
+                0,
+                0,
+                1
+              ]
+            }
+          ],
+          "speedEvents": [
+            {
+              "end": 10.0,
+              "endTime": [
+                1,
+                0,
+                1
+              ],
+              "linkgroup": 0,
+              "start": 10.0,
+              "startTime": [
+                0,
+                0,
+                1
+              ]
+            }
+          ]
+        }
+      ],
+      "extended": {
+        "inclineEvents": [
+          {
+            "bezier": 0,
+            "bezierPoints": [
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "easingLeft": 0.0,
+            "easingRight": 1.0,
+            "easingType": 0,
+            "end": 0.0,
+            "endTime": [
+              1,
+              0,
+              1
+            ],
+            "linkgroup": 0,
+            "start": 0.0,
+            "startTime": [
+              0,
+              0,
+              1
+            ]
+          }
+        ]
+      },
+      "father": -1,
+      "isCover": 1,
+      "notes": [
+        {
+          "above": 1,
+          "alpha": 255,
+          "endTime": [
+            0,
+            0,
+            1
+          ],
+          "isFake": 0,
+          "positionX": -405.0,
+          "size": 1.0,
+          "speed": 1.0,
+          "startTime": [
+            0,
+            0,
+            1
+          ],
+          "type": 1,
+          "visibleTime": 999999.0,
+          "yOffset": 0.0
+        },
+        {
+          "above": 1,
+          "alpha": 255,
+          "endTime": [
+            0,
+            0,
+            1
+          ],
+          "isFake": 0,
+          "positionX": -135.0,
+          "size": 1.0,
+          "speed": 1.0,
+          "startTime": [
+            0,
+            0,
+            1
+          ],
+          "type": 1,
+          "visibleTime": 999999.0,
+          "yOffset": 0.0
+        },
+        {
+          "above": 1,
+          "alpha": 255,
+          "endTime": [
+            0,
+            0,
+            1
+          ],
+          "isFake": 0,
+          "positionX": 135.0,
+          "size": 1.0,
+          "speed": 1.0,
+          "startTime": [
+            0,
+            0,
+            1
+          ],
+          "type": 1,
+          "visibleTime": 999999.0,
+          "yOffset": 0.0
+        },
+        {
+          "above": 1,
+          "alpha": 255,
+          "endTime": [
+            0,
+            0,
+            1
+          ],
+          "isFake": 0,
+          "positionX": 405.0,
+          "size": 1.0,
+          "speed": 1.0,
+          "startTime": [
+            0,
+            0,
+            1
+          ],
+          "type": 1,
+          "visibleTime": 999999.0,
+          "yOffset": 0.0
+        },
+        {
+          "above": 1,
+          "alpha": 255,
+          "endTime": [
+            32,
+            0,
+            1
+          ],
+          "isFake": 0,
+          "positionX": -405.0,
+          "size": 1.0,
+          "speed": 1.0,
+          "startTime": [
+            32,
+            0,
+            1
+          ],
+          "type": 1,
+          "visibleTime": 999999.0,
+          "yOffset": 0.0
+        },
+        {
+          "above": 1,
+          "alpha": 255,
+          "endTime": [
+            32,
+            0,
+            1
+          ],
+          "isFake": 0,
+          "positionX": -135.0,
+          "size": 1.0,
+          "speed": 1.0,
+          "startTime": [
+            32,
+            0,
+            1
+          ],
+          "type": 1,
+          "visibleTime": 999999.0,
+          "yOffset": 0.0
+        },
+        {
+          "above": 1,
+          "alpha": 255,
+          "endTime": [
+            32,
+            0,
+            1
+          ],
+          "isFake": 0,
+          "positionX": 135.0,
+          "size": 1.0,
+          "speed": 1.0,
+          "startTime": [
+            32,
+            0,
+            1
+          ],
+          "type": 1,
+          "visibleTime": 999999.0,
+          "yOffset": 0.0
+        },
+        {
+          "above": 1,
+          "alpha": 255,
+          "endTime": [
+            2,
+            3,
+            4
+          ],
+          "isFake": 0,
+          "positionX": -135.0,
+          "size": 1.0,
+          "speed": 1.0,
+          "startTime": [
+            1,
+            0,
+            1
+          ],
+          "type": 2,
+          "visibleTime": 999999.0,
+          "yOffset": 0.0
+        },
+        {
+          "above": 1,
+          "alpha": 255,
+          "endTime": [
+            33,
+            0,
+            1
+          ],
+          "isFake": 0,
+          "positionX": 405.0,
+          "size": 1.0,
+          "speed": 1.0,
+          "startTime": [
+            32,
+            0,
+            1
+          ],
+          "type": 2,
+          "visibleTime": 999999.0,
+          "yOffset": 0.0
+        }
+      ],
+      "numOfNotes": 7,
+      "posControl": [
+        {
+          "easing": 1,
+          "pos": 1.0,
+          "x": 0.0
+        },
+        {
+          "easing": 1,
+          "pos": 1.0,
+          "x": 9999999.0
+        }
+      ],
+      "sizeControl": [
+        {
+          "easing": 1,
+          "size": 1.0,
+          "x": 0.0
+        },
+        {
+          "easing": 1,
+          "size": 1.0,
+          "x": 9999999.0
+        }
+      ],
+      "skewControl": [
+        {
+          "easing": 1,
+          "skew": 0.0,
+          "x": 0.0
+        },
+        {
+          "easing": 1,
+          "skew": 0.0,
+          "x": 9999999.0
+        }
+      ],
+      "yControl": [
+        {
+          "easing": 1,
+          "x": 0.0,
+          "y": 1.0
+        },
+        {
+          "easing": 1,
+          "x": 9999999.0,
+          "y": 1.0
+        }
+      ],
+      "zOrder": 0
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+    "cues": [],
+    "lyrics": [
+        {
+            "start": 0.5,
+            "end": 2.0,
+            "text": "第 1 首歌曲"
+        }
+    ],
+    "animations": [
+        {
+            "target": "角色",
+            "sequence": "摆动",
+            "startBeat": 0.0,
+            "endBeat": 24.0,
+            "placeholderFrames": 16
+        }
+    ],
+    "spriteBank": "StageAnimations/StageDemoAseprite 1",
+    "ending": ""
+}

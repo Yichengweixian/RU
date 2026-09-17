@@ -1,0 +1,2 @@
+PASS 44 sprite sheet checks
+Demo bank: Assets/Resources/StageAnimations/StageDemoAseprite 1.asset

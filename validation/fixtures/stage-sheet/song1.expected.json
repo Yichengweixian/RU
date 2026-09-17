@@ -1,0 +1,40 @@
+{
+    "samples": [
+        {
+            "start": 0.27,
+            "end": 0.34,
+            "frame": 0,
+            "lyric": ""
+        },
+        {
+            "start": 0.395,
+            "end": 0.465,
+            "frame": 1,
+            "lyric": ""
+        },
+        {
+            "start": 0.52,
+            "end": 0.59,
+            "frame": 2,
+            "lyric": "第 1 首歌曲"
+        },
+        {
+            "start": 0.645,
+            "end": 0.715,
+            "frame": 3,
+            "lyric": "第 1 首歌曲"
+        },
+        {
+            "start": 2.02,
+            "end": 2.09,
+            "frame": 2,
+            "lyric": ""
+        },
+        {
+            "start": 4.38,
+            "end": 4.42,
+            "frame": 1,
+            "lyric": ""
+        }
+    ]
+}

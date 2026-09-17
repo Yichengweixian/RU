@@ -1,0 +1,38 @@
+{
+    "cues": [],
+    "lyrics": [
+        {
+            "start": 0.5,
+            "end": 1.0,
+            "text": "尚未保存的修改"
+        },
+        {
+            "start": 1.0,
+            "end": 2.0,
+            "text": "第二句"
+        },
+        {
+            "start": 3.0,
+            "end": 4.5,
+            "text": "跨越变 BPM 的歌词"
+        }
+    ],
+    "animations": [
+        {
+            "target": "角色",
+            "sequence": "",
+            "startBeat": 0.0,
+            "endBeat": 16.0,
+            "placeholderFrames": 8
+        },
+        {
+            "target": "灯",
+            "sequence": "",
+            "startBeat": 4.0,
+            "endBeat": 20.0,
+            "placeholderFrames": 16
+        }
+    ],
+    "spriteBank": "",
+    "ending": ""
+}

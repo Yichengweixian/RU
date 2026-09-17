@@ -1,0 +1,43 @@
+# Local tools and temporary repository checkout
+tools/
+.remote-ru-check/
+.claude/
+*.lnk
+
+# Local/generated backup data that should not be published
+backup-original/PackageManager-before-rpe/ProjectCache
+backup-original/UOSLauncherEncrypt/EncryptKey.cs
+
+# Unity generated files
+**/[Ll]ibrary/
+**/[Tt]emp/
+**/[Oo]bj/
+**/[Bb]uild/
+**/[Bb]uilds/
+**/[Ll]ogs/
+**/[Uu]ser[Ss]ettings/
+**/[Mm]emoryCaptures/
+**/[Rr]ecordings/
+
+# IDE and operating-system files
+.vs/
+.vscode/
+.idea/
+*.csproj
+*.sln
+*.suo
+*.user
+*.tmp
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+.DS_Store
+Thumbs.db
+
+# Build and crash output
+sysinfo.txt
+crashlytics-build.properties
